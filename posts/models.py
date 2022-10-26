@@ -20,5 +20,4 @@ class Post(models.Model):
         to='accounts.Account', 
         related_name='liked_posts'
         )
-
-
+    created_at = models.DateTimeField(auto_now_add = True)
