@@ -1,0 +1,12 @@
+
+
+<form action="" method='POST'>
+    <div class='form'>
+        {% csrf_token %}
+
+        {{form.as_p}}
+
+        <input class="btn btn-secondary" type="submit" value="Войти">
+
+    </div>
+</form>
