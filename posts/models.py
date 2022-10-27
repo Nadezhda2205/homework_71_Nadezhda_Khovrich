@@ -2,8 +2,6 @@ from django.db import models
 from django.contrib.auth import get_user_model
 
 
-
-
 class Post(models.Model):
     description = models.CharField(verbose_name='Описание', null=False, blank=False, max_length=200)
     image = models.ImageField(verbose_name='Фото', null=False, blank=False, upload_to='posts')

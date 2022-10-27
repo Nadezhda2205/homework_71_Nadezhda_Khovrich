@@ -1,12 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Войти
+{% endblock %}
 
 
-<form action="" method='POST'>
-    <div class='form'>
-        {% csrf_token %}
+{% block content %}
+<div class="d-flex justify-content-center">
+    <div class="border border-4 p-5" style="width: 330px;">
+        <img src="{% static 'img/insta.png' %}" alt="instagram" height="55" width="144">
 
-        {{form.as_p}}
+        <div>
+            <form action="" method="POST">
+                {% csrf_token %}
 
-        <input class="btn btn-secondary" type="submit" value="Войти">
-
+            <form action="" method='POST'>
+                <div class='form'>
+                    {% csrf_token %}
+            
+                    {{form.as_p}}
+            
+                    <input class="btn btn-secondary" type="submit" value="Войти">
+            
+                </div>
+            </form>
+        </div>
     </div>
-</form>
+</div>
+{% endblock %}
+
+
