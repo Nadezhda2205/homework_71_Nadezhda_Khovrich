@@ -6,6 +6,7 @@ from django.views.generic import ListView
 class PostListView(ListView):
     '''просмот списка проектов, 
     dispatch - проверка на добавление задачи пользователю именно этого проекта'''
-    template_name: str = 'base.html'
+    template_name: str = 'posts/index.html'
     model = Post
-    context_object_name = 'projects'
+    context_object_name = 'posts'
+
