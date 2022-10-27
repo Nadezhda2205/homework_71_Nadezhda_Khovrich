@@ -14,9 +14,12 @@ class Account(AbstractUser):
         blank=True,
         verbose_name='Дата рождения'
     )
-    # subscriptions = models.ManyToManyField(verbose_name='Подписки', to='accounts.Account', related_name='subscribers')
-    # commented_posts = models.ManyToManyField('Прокомментированные публикации', to='posts.Post', related_name='user_comments')
-
+    subscriptions = models.ManyToManyField(
+        verbose_name='Подписки', 
+        to='accounts.Account', 
+        related_name='subscribers',
+        blank=True
+        )
 
 
     class Meta:
