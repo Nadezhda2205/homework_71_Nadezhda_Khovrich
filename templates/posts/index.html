@@ -7,13 +7,31 @@
 
 {% block content %}
 {% for post in posts %}
+<div class="mb-5 border border-2" style="width: 800px;">
+    <div>
+        <b>{{ post.author }}</b>
+    </div>
+    <div>
+        <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
+    </div>
+    <div>
+        <a href="#"><img src="{% static 'icon/icon-heart.png' %}" alt="heart" height="25" width="25"></a>
+        <a href="#"><img src="{% static 'icon/icon-comm.png' %}" alt="heart" height="35" width="35"></a>
+    </div>    
+        <p>{{ post.liked_users.all.count }} отметок "Нравится"</p>
+    <div>
+        <b>@{{ post.author }}</b>
+        <p  style="width: 800px;">
+            {{ post.description }}
+        </p>
+    </div>
 
-<img src="{{ post.image.url }}" alt="">
-{{ post.description }}
-{{ post.author }}
-{{ post.liked_users.all.count }}
-{{ post.commented_users.all.count }}
 
+
+<input type="submit">
+
+    количество комментариев {{ post.commented_users.all.count }}
+</div>
 {% endfor %}
 
 {% endblock %}
