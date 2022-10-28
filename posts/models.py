@@ -17,8 +17,7 @@ class Post(models.Model):
     liked_users = models.ManyToManyField(
         verbose_name='Понравилось пользователям', 
         to='accounts.Account', 
-        related_name='liked_posts',
-        blank=True,
+        related_name='liked_posts'
         )
     created_at = models.DateTimeField(auto_now_add = True)
     commented_users = models.ManyToManyField(

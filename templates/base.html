@@ -35,14 +35,18 @@
             {% endif %}
           </li>
           <div class="ms-5 d-flex align-items-center">
+            
             <div class="align-items-center">
-              
-              <form action="#" method="GET">
+              <form action="{% url 'index' %}" method="GET">
                 {% csrf_token %}
+
+                {{ searchtaskform }}
+
                 <input class="btn btn-secondary btn-sm" type="submit" value="Поиск">
+
               </form>
-              
             </div>
+              
             <div class="ms-5 d-flex align-items-center">
               {% if user.is_authenticated %}
                 <li class="cl_color">

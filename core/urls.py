@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from accounts.views import LoginView, logout_view
+from accounts.views import LoginView, logout_view, RegisterView
 from posts.views import PostListView
 
 urlpatterns = [
@@ -10,6 +10,7 @@ urlpatterns = [
     path('', PostListView.as_view(), name='index'),
     path('login/', LoginView.as_view(), name='login'),
     path('logout/', logout_view, name='logout'),
-    # path('signup/', SignupView.as_view(), name='signup'),
+
+    path('register/', RegisterView.as_view(), name='register'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

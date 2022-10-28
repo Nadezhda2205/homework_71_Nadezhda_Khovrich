@@ -16,10 +16,16 @@ class CustomUserСreationForm(forms.ModelForm):
     '''форма регистрации пользователя'''
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True, widget=forms.PasswordInput)
+    email = forms.EmailField(label='Email', required=True)
+
 
     class Meta:
         model = get_user_model()
-        fields = ('username', 'password', 'password_confirm', 'first_name', 'last_name', 'email', 'avatar', 'birthday')
+        fields = (
+            'username', 'email', 'avatar', 
+            'password', 'password_confirm', 
+            'first_name', 'about', 'phone', 'sex'
+            )
 
     def clean(self):
         cleaned_data = super().clean()
@@ -31,7 +37,6 @@ class CustomUserСreationForm(forms.ModelForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get('password'))
-        user.groups.add('user')
 
         if commit:
             user.save()
