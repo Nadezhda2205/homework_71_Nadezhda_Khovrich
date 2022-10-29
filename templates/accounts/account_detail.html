@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Страница
+{% endblock %}
+
+
+{% block content %}
+    <h3>Страница {{ account.username }}</h3>
+    {% if account.avatar %}
+        <img class="border border-2 rounded-circle" src="{{ account.avatar.url }}" alt="image" height="400" width="700">
+    {% else %}
+        <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+    {%endif%}    
+    <p></p>
+    <p>{{ account.birthday}}</p>
+    <p>{{ account.about}}</p>
+    <p>{{ account.phone}}</p>
+    <p>{{ account.sex}}</p>
+    <p>{{ account.subscriptions.all.count}}</p>
+    <p>{{ account.subscribers.all.count}}</p>
+{% endblock %}

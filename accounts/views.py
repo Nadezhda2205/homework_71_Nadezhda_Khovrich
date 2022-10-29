@@ -1,10 +1,11 @@
-from django.shortcuts import redirect
-from django.views.generic import TemplateView, CreateView
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import TemplateView, CreateView, DetailView
 from django.contrib.auth import authenticate, login, logout
 
 
 from accounts.forms import CustomUserСreationForm
 from accounts.forms import LoginForm
+from accounts.models import Account
 
 
 
@@ -55,3 +56,11 @@ class RegisterView(CreateView):
         context['form'] = form
         return self.render_to_response(context)
 
+
+class AccountDetailView(DetailView):
+    template_name = 'accounts/account_detail.html'
+    model = Account
+    context_object_name = 'account'
+
+    def get_object(self, queryset=None):
+        return get_object_or_404(Account, username=self.kwargs.get('slug'))
