@@ -68,16 +68,17 @@ class AccountDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        subscriptions = self.request.user.subscriptions.all()
-        user = self.get_object()
-        unsubscribe_flag = None
-        subscribe_flag = None
-        if user in subscriptions:
-            unsubscribe_flag = True
-        else:
-            subscribe_flag = True
-        context['unsubscribe_flag'] = unsubscribe_flag
-        context['subscribe_flag'] = subscribe_flag
+        if self.request.user.is_authenticated:
+            subscriptions = self.request.user.subscriptions.all()
+            user = self.get_object()
+            unsubscribe_flag = None
+            subscribe_flag = None
+            if user in subscriptions:
+                unsubscribe_flag = True
+            else:
+                subscribe_flag = True
+            context['unsubscribe_flag'] = unsubscribe_flag
+            context['subscribe_flag'] = subscribe_flag
         
         return context
 
