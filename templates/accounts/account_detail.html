@@ -12,6 +12,14 @@
     {% else %}
         <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
     {%endif%}    
+    {% if subscribe_flag %}
+        <a href="{% url 'subscribe' account.username %}">Подписаться</a>
+        
+    {% endif %}
+    {% if unsubscribe_flag %}
+        <a href="{% url 'unsubscribe' account.username %}">Отписаться</a>
+    {% endif %}
+
     <p></p>
     <p>{{ account.birthday}}</p>
     <p>{{ account.about}}</p>
