@@ -4,7 +4,7 @@
 
 {% block content %}
 
-<form action="{% url 'post_add' %}" method='POST'>
+<form action="" method='POST' enctype="multipart/form-data">
     <div class='form'>
         {% csrf_token %}
 
