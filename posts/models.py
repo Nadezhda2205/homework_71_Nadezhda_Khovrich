@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 
 class Post(models.Model):
     description = models.CharField(verbose_name='Описание', null=False, blank=False, max_length=200)
-    image = models.ImageField(verbose_name='Фото', null=False, blank=False, upload_to='posts')
+    image = models.ImageField(verbose_name='Фото', upload_to='posts')
     author = models.ForeignKey(
         verbose_name='Автор',
         to=get_user_model(), 

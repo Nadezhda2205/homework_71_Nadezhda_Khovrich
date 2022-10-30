@@ -48,7 +48,7 @@ class RegisterView(CreateView):
     succes_url = '/'
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             user = form.save()
             login(request, user)

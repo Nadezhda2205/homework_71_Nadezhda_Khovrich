@@ -4,13 +4,13 @@
 
 {% block content %}
 
-<form enctype="multipart/form-data" method="POST" action="">
+<form action="{% url 'post_add' %}" method='POST'>
     <div class='form'>
         {% csrf_token %}
 
         {{form.as_p}}
 
-        <input type="submit" value="Зарегистрироваться">
+        <input type="submit" value="Создать пост">
 
     </div>
 </form>

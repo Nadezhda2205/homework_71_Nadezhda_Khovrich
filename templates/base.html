@@ -31,7 +31,7 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             {% if user.is_authenticated %}
-            <a class="nav-link active" aria-current="page" href="#"><span class="cl_color">Новый проект</span></a>
+            <a class="nav-link active" aria-current="page" href="{% url 'post_add' %}"><span class="cl_color">Добавить пост</span></a>
             {% endif %}
           </li>
           <div class="ms-5 d-flex align-items-center">

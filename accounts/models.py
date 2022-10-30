@@ -10,8 +10,7 @@ class Account(AbstractUser):
     SEX_CHOICES = [('M', 'мужской'), ('F', 'женский')] 
     avatar = models.ImageField(
         upload_to='avatars',
-        verbose_name='Аватар',
-        blank=True
+        verbose_name='Аватар'
     )
     birthday = models.DateField(
         null=True,

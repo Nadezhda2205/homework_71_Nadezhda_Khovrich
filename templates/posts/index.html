@@ -21,7 +21,11 @@
 
     </div>
     <div>
-        <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
+        {% if post.image %}
+            <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
+        {% else %}
+            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+        {%endif%}       
     </div>
     <div>
         <a href="#"><img src="{% static 'icon/icon-heart.png' %}" alt="heart" height="25" width="25"></a>

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from posts.models import Post
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 
 class PostListView(ListView):
@@ -10,3 +10,9 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
 
+
+class PostCreateView(CreateView):
+    template_name = 'posts/post_add.html'
+    model = Post
+    fields = ['image', 'description', 'author']
+    success_url = '/'
