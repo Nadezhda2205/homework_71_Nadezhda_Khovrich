@@ -3,7 +3,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from accounts.views import LoginView, logout_view, RegisterView, AccountDetailView, unsubscribe_view, subscribe_view
-from posts.views import PostListView, PostCreateView
+from posts.views import PostListView, PostCreateView, CommentCreateView
 
 
 urlpatterns = [
@@ -21,6 +21,9 @@ urlpatterns = [
     path('subscribe/<str:slug>', subscribe_view, name='subscribe'),
 
     path('post/add', PostCreateView.as_view(), name='post_add'),
+    
+    path('post/<int:pk>/comment/add', CommentCreateView.as_view(), name='post_comment_add'),
+    
 
 
 

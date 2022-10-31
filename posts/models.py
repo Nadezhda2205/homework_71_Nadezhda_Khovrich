@@ -27,6 +27,9 @@ class Post(models.Model):
         related_name='post_comments'
         )
 
+    class Meta():
+        ordering = ['-created_at']
+
 
 class Comment(models.Model):
     author = models.ForeignKey(verbose_name='Автор', to=get_user_model(), related_name='comments', null=False,

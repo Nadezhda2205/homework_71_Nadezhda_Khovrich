@@ -39,12 +39,29 @@
         </p>
     </div>
 
+{% if user.is_authenticated %}
+    <form class="d-flex" action="{% url 'post_comment_add' post.pk %}" method='POST'>
+        {% csrf_token %}
 
+         <div class="">
 
-<input type="submit">
+            {{ comment_form.as_p }}
 
-    количество комментариев {{ post.commented_users.all.count }}
+            {% comment %} <textarea placeholder="Добавьте комментарий..." class="" autocomplete="off" autocorrect="off" style="width: 630px; height: 25px !important;"></textarea> {% endcomment %}
+            <button class=""type="submit">Опубликовать</button>
+            
+        </div>
+    </form>    
+{% endif %}
+    {% comment %} количество комментариев {{ post.commented_users.all.count }} {% endcomment %}
+        
 </div>
 {% endfor %}
+
+
+
+
+
+
 
 {% endblock %}
