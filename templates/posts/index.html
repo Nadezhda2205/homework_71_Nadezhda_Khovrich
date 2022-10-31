@@ -53,14 +53,16 @@
         </div>
     </form>    
 {% endif %}
-    {% comment %} количество комментариев {{ post.commented_users.all.count }} {% endcomment %}
+
+    {% for comment in post.comments.all %}
+        {{ comment.author }}
+        {{ comment.created_at }}
+        {{ comment.text }}
+    {% endfor %}
+    количество комментариев {{ post.comments.all.count }}
         
 </div>
 {% endfor %}
-
-
-
-
 
 
 

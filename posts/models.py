@@ -40,3 +40,6 @@ class Comment(models.Model):
     text = models.CharField(verbose_name='Текст', null=False, blank=False, max_length=200)
     created_at = models.DateTimeField(auto_now_add = True)
 
+    class Meta():
+        ordering = ['-created_at']
+    
