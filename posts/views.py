@@ -4,6 +4,9 @@ from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse
 from posts.forms import CommentForm
 from django.core.handlers.wsgi import WSGIRequest
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
 from accounts.models import Account
 
 
@@ -14,7 +17,7 @@ class PostListView(ListView):
     context_object_name = 'posts'
 
 
-class PostCreateView(CreateView):
+class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/post_add.html'
     model = Post
     fields = ['image', 'description']
@@ -28,7 +31,7 @@ class PostCreateView(CreateView):
         return super().form_valid(form)
 
 
-class CommentCreateView(CreateView):
+class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
     success_url = '/'
@@ -44,19 +47,20 @@ class CommentCreateView(CreateView):
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.kwargs.get('pk')})
 
-
+@login_required
 def unlike_view(request: WSGIRequest, pk):
     user_from_request: Account = request.user
     post_by_pk = get_object_or_404(Post, pk=pk)
     post_by_pk.liked_users.remove(user_from_request)
-    return redirect ('index')
+    return redirect (f'/#{pk}')
 
 
+@login_required
 def like_view(request: WSGIRequest, pk):
     user_from_request: Account = request.user
     post_by_pk = get_object_or_404(Post, pk=pk)
     post_by_pk.liked_users.add(user_from_request)
-    return redirect ('index')
+    return redirect (f'/#{pk}')
 
 
 class PostDetailView(DetailView):

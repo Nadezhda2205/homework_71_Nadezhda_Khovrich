@@ -3,6 +3,8 @@ from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.contrib.auth import authenticate, login, logout
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+
 
 
 from accounts.forms import CustomUserСreationForm
@@ -67,13 +69,14 @@ class AccountDetailView(DetailView):
     def get_object(self, queryset=None):
         return get_object_or_404(Account, username=self.kwargs.get('slug'))
         
-
+@login_required
 def unsubscribe_view(request: WSGIRequest, slug):
     user_from_request: Account = request.user
     user_by_slug = get_object_or_404(Account, username=slug)
     user_from_request.subscriptions.remove(user_by_slug)
     return redirect ('account_detail', slug=slug)
 
+@login_required
 def subscribe_view(request: WSGIRequest, slug):
     user_from_request: Account = request.user
     user_by_slug = get_object_or_404(Account, username=slug)
