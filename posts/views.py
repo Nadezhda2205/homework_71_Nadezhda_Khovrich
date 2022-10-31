@@ -3,6 +3,9 @@ from posts.models import Post, Comment
 from django.views.generic import ListView, CreateView
 from django.urls import reverse
 from posts.forms import CommentForm
+from django.core.handlers.wsgi import WSGIRequest
+from accounts.models import Account
+
 
 
 class PostListView(ListView):
@@ -13,7 +16,10 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         comment_form = CommentForm()
+
         context['comment_form'] = comment_form
+        # context['like_flag'] = like_flag
+        # context['unlike_flag'] = unlike_flag
         
         return context
 
@@ -44,3 +50,17 @@ class CommentCreateView(CreateView):
         self.object.author = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+
+def unlike_view(request: WSGIRequest, pk):
+    user_from_request: Account = request.user
+    post_by_pk = get_object_or_404(Post, pk=pk)
+    post_by_pk.liked_users.remove(user_from_request)
+    return redirect ('index')
+
+
+def like_view(request: WSGIRequest, pk):
+    user_from_request: Account = request.user
+    post_by_pk = get_object_or_404(Post, pk=pk)
+    post_by_pk.liked_users.add(user_from_request)
+    return redirect ('index')

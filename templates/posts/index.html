@@ -28,7 +28,14 @@
         {%endif%}       
     </div>
     <div>
-        <a href="#"><img src="{% static 'icon/icon-heart.png' %}" alt="heart" height="25" width="25"></a>
+        {% if user in post.liked_users.all %}
+            <a href="{% url 'unlike' post.pk%}"><img src="{% static 'icon/heart_like.png' %}" alt="heart" height="25" width="25"></a>
+
+        {% else %}
+            <a href="{% url 'like' post.pk%}"><img src="{% static 'icon/heart_unlike.png' %}" alt="heart" height="25" width="25"></a>
+
+        {% endif %}
+        
         <a href="#"><img src="{% static 'icon/icon-comm.png' %}" alt="heart" height="35" width="35"></a>
     </div>    
         <p>{{ post.liked_users.all.count }} отметок "Нравится"</p>
