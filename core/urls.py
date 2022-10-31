@@ -11,7 +11,7 @@ from accounts.views import (
     subscribe_view,
     SearchAccountListView
 )
-from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view
+from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view, PostDetailView
 
 
 urlpatterns = [
@@ -36,6 +36,7 @@ urlpatterns = [
     path('post/add', PostCreateView.as_view(), name='post_add'),
     
     path('post/<int:pk>/comment/add', CommentCreateView.as_view(), name='post_comment_add'),
+    path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
     
 
 

@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, get_object_or_404
 from posts.models import Post, Comment
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse
 from posts.forms import CommentForm
 from django.core.handlers.wsgi import WSGIRequest
@@ -12,12 +12,6 @@ class PostListView(ListView):
     template_name: str = 'posts/index.html'
     model = Post
     context_object_name = 'posts'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        comment_form = CommentForm()
-        context['comment_form'] = comment_form
-        return context
 
 
 class PostCreateView(CreateView):
@@ -47,6 +41,9 @@ class CommentCreateView(CreateView):
         self.object.save()
         return super().form_valid(form)
 
+    def get_success_url(self):
+        return reverse('post_detail', kwargs={'pk': self.kwargs.get('pk')})
+
 
 def unlike_view(request: WSGIRequest, pk):
     user_from_request: Account = request.user
@@ -60,3 +57,15 @@ def like_view(request: WSGIRequest, pk):
     post_by_pk = get_object_or_404(Post, pk=pk)
     post_by_pk.liked_users.add(user_from_request)
     return redirect ('index')
+
+
+class PostDetailView(DetailView):
+    template_name = 'posts/post_detail.html'
+    model = Post
+    context_object_name = 'post'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        comment_form = CommentForm()
+        context['comment_form'] = comment_form
+        return context

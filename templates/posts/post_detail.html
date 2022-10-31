@@ -2,11 +2,12 @@
 {% load static %}
 
 {% block title %}
-Главная страница
+    Страница
 {% endblock %}
 
+
 {% block content %}
-{% for post in posts %}
+
 <div class="mb-5 border border-2" style="width: 800px;">
     <div>
         {% if post.author.avatar %}
@@ -21,13 +22,11 @@
 
     </div>
     <div>
-        <a href="{% url 'post_detail' post.pk%}">
-            {% if post.image %}
-                <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
-            {% else %}
-                <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
-            {%endif%}
-        </a>      
+        {% if post.image %}
+            <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
+        {% else %}
+            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+        {%endif%}       
     </div>
     <div>
         {% if user in post.liked_users.all %}
@@ -48,12 +47,28 @@
         </p>
     </div>
 
+{% if user.is_authenticated %}
+    <form class="d-flex" action="{% url 'post_comment_add' post.pk %}" method='POST'>
+        {% csrf_token %}
 
+         <div class="">
+
+            {{ comment_form.as_p }}
+
+            <button class=""type="submit">Опубликовать</button>
+            
+        </div>
+    </form>    
+{% endif %}
+
+    {% for comment in post.comments.all %}
+        {{ comment.author }}
+        {{ comment.created_at }}
+        {{ comment.text }}
+    {% endfor %}
     количество комментариев {{ post.comments.all.count }}
         
 </div>
-{% endfor %}
-
 
 
 {% endblock %}

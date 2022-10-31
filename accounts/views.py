@@ -82,7 +82,7 @@ def subscribe_view(request: WSGIRequest, slug):
 
 
 class SearchAccountListView(ListView):
-    template_name: str = 'account_list.html'
+    template_name: str = 'accounts/account_list.html'
     model = Account
     context_object_name = 'accounts'
  
