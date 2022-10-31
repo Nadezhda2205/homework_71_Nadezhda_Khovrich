@@ -2,7 +2,15 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from accounts.views import LoginView, logout_view, RegisterView, AccountDetailView, unsubscribe_view, subscribe_view
+from accounts.views import (
+    LoginView, 
+    logout_view, 
+    RegisterView, 
+    AccountDetailView, 
+    unsubscribe_view, 
+    subscribe_view,
+    SearchAccountListView
+)
 from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view
 
 
@@ -14,6 +22,7 @@ urlpatterns = [
 
     path('register/', RegisterView.as_view(), name='register'),
     
+    path('account/search', SearchAccountListView.as_view(), name='account_list'),
     path('account/<str:slug>', AccountDetailView.as_view(), name='account_detail'),
     
     

@@ -1,7 +1,8 @@
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import TemplateView, CreateView, DetailView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView
 from django.contrib.auth import authenticate, login, logout
 from django.core.handlers.wsgi import WSGIRequest
+from django.db.models import Q
 
 
 from accounts.forms import CustomUserСreationForm
@@ -73,7 +74,6 @@ def unsubscribe_view(request: WSGIRequest, slug):
     user_from_request.subscriptions.remove(user_by_slug)
     return redirect ('account_detail', slug=slug)
 
-
 def subscribe_view(request: WSGIRequest, slug):
     user_from_request: Account = request.user
     user_by_slug = get_object_or_404(Account, username=slug)
@@ -81,5 +81,20 @@ def subscribe_view(request: WSGIRequest, slug):
     return redirect ('account_detail', slug=slug)
 
 
+class SearchAccountListView(ListView):
+    template_name: str = 'account_list.html'
+    model = Account
+    context_object_name = 'accounts'
+ 
+    def get(self, request, *args, **kwargs):
+        self.search_value = request.GET.get('search')
+        return super().get(request, *args, **kwargs)
 
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        if self.search_value:
+            queryset = queryset.filter(
+                Q(first_name__iregex=self.search_value) | Q(email__iregex=self.search_value) | Q(username__iregex=self.search_value)
+                )
+        return queryset
 

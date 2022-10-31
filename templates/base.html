@@ -37,11 +37,10 @@
           <div class="ms-5 d-flex align-items-center">
             
             <div class="align-items-center">
-              <form action="{% url 'index' %}" method="GET">
+              <form action="{% url 'account_list' %}" method="GET">
                 {% csrf_token %}
-
-                {{ searchtaskform }}
-
+               
+                <input class="btn btn-secondary btn-sm" name="search" type="text">
                 <input class="btn btn-secondary btn-sm" type="submit" value="Поиск">
 
               </form>
@@ -67,7 +66,6 @@
       </div>
     </div>
   </nav>
-
   
   <div class="container">
     {% block content %}

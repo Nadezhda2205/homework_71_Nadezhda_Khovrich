@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Страница
+{% endblock %}
+
+
+{% block content %}
+
+{% for account in accounts %}
+{{ account}}
+
+{% endfor %}
+
+{% endblock %}
