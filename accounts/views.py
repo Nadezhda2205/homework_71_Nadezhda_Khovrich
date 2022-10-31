@@ -65,22 +65,7 @@ class AccountDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Account, username=self.kwargs.get('slug'))
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.request.user.is_authenticated:
-            subscriptions = self.request.user.subscriptions.all()
-            user = self.get_object()
-            unsubscribe_flag = None
-            subscribe_flag = None
-            if user in subscriptions:
-                unsubscribe_flag = True
-            else:
-                subscribe_flag = True
-            context['unsubscribe_flag'] = unsubscribe_flag
-            context['subscribe_flag'] = subscribe_flag
         
-        return context
 
 def unsubscribe_view(request: WSGIRequest, slug):
     user_from_request: Account = request.user

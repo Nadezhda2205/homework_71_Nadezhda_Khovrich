@@ -16,11 +16,7 @@ class PostListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         comment_form = CommentForm()
-
         context['comment_form'] = comment_form
-        # context['like_flag'] = like_flag
-        # context['unlike_flag'] = unlike_flag
-        
         return context
 
 
