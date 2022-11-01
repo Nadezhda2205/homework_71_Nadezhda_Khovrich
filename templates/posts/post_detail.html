@@ -65,7 +65,7 @@
 </div>
     <div >
         {% for comment in post.comments.all %}
-            <span class"span">@{{ comment.author }}</span><br>
+            <span class"span"><b>@{{ comment.author }}</b></span><br>
                 <span class"span">Дата {{ comment.created_at }}</span><br>
                     <span>Комментарий</span><span>{{ comment.text }}</span><br>
         {% endfor %}
