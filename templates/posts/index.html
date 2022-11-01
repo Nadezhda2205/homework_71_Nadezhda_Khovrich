@@ -7,7 +7,7 @@
 
 {% block content %}
 {% for post in posts %}
-<div id="{{ post.pk }}" class="mb-5 border border-2" style="width: 800px;">
+<div id="{{ post.pk }}" style="width: 800px;">
     <div>
         {% if post.author.avatar %}
             <img class="border border-2 rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
@@ -38,7 +38,6 @@
 
         {% endif %}
         
-        <a href="#"><img src="{% static 'icon/icon-comm.png' %}" alt="heart" height="35" width="35"></a>
     </div>    
         <p>{{ post.liked_users.all.count }} отметок "Нравится"</p>
     <div>

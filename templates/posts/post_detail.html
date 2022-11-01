@@ -46,27 +46,28 @@
             {{ post.description }}
         </p>
     </div>
+<div class="d-flex">
+    {% if user.is_authenticated %}
+        <form action="{% url 'post_comment_add' post.pk %}" method='POST'>
+            {% csrf_token %}
 
-{% if user.is_authenticated %}
-    <form class="d-flex" action="{% url 'post_comment_add' post.pk %}" method='POST'>
-        {% csrf_token %}
+            <div class="">
 
-         <div class="">
+                {{ comment_form.as_p }}
 
-            {{ comment_form.as_p }}
+                <button class=""type="submit">Опубликовать</button>
+                
+            </div>
+        </form>    
+        количество комментариев {{ post.comments.all.count }}
 
-            <button class=""type="submit">Опубликовать</button>
-            
-        </div>
-    </form>    
-{% endif %}
+    {% endif %}
+</div>
 
     {% for comment in post.comments.all %}
-        {{ comment.author }}
-        {{ comment.created_at }}
-        {{ comment.text }}
+        <p>@{{ comment.author }}{{ comment.created_at }}</p>
+                <p>{{ comment.text }}</p>
     {% endfor %}
-    количество комментариев {{ post.comments.all.count }}
         
 </div>
 

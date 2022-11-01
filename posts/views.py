@@ -73,3 +73,4 @@ class PostDetailView(DetailView):
         comment_form = CommentForm()
         context['comment_form'] = comment_form
         return context
+        

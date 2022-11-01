@@ -76,7 +76,7 @@
                 <div>
                     {% if post.image %}
                         
-                        <a class="nav-link active" aria-current="page" href="#"><img src="{{ post.image.url }}" alt="image" height="250" width="250"></a>
+                        <a class="nav-link active" aria-current="page" href="{% url 'post_detail' post.pk %}"><img src="{{ post.image.url }}" alt="image" height="250" width="250"></a>
 
                 </div>
                 <div>
