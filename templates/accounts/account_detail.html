@@ -19,7 +19,7 @@
     <h3>{{ account.username }}</h3>
     <div class="d-block">
         <div class="d-flex mb-3">
-            <a class=" btn btn-secondary btn-sm ms-5" href="#">Редактировать профиль</a>
+            {% comment %} <a class=" btn btn-secondary btn-sm ms-5" href="#">Редактировать профиль</a> {% endcomment %}
             {% if user.is_authenticated %}
                 {% if account in user.subscriptions.all %}
                     <a class="height_button btn btn-secondary btn-sm ms-5" href="{% url 'unsubscribe' account.username %}">Отписаться</a>
