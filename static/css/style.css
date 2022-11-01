@@ -15,3 +15,7 @@ a{
 .d-contents{
     display: contents;
 }
+
+span{
+    margin-right: 32px;
+}

@@ -11,9 +11,9 @@
     
     <div class="me-5">
         {% if account.avatar %}
-            <img class="border border-2 rounded-circle" src="{{ account.avatar.url }}" alt="image" height="200" width="250">
+            <img class="rounded-circle" src="{{ account.avatar.url }}" alt="image" height="200" width="250">
         {% else %}
-            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+            <img class="rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
         {%endif%} 
     </div>
     <h3>{{ account.username }}</h3>

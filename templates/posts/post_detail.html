@@ -8,12 +8,12 @@
 
 {% block content %}
 
-<div class="mb-5 border border-2" style="width: 800px;">
+<div class="mb-5" style="width: 800px;">
     <div>
         {% if post.author.avatar %}
-            <img class="border border-2 rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
+            <img class=" rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
         {% else %}
-            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" width="23">
+            <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" width="23">
         {%endif%}   
         <a href="{% url 'account_detail' post.author.username %}">
             <b>{{ post.author }}</b>
@@ -23,9 +23,9 @@
     </div>
     <div>
         {% if post.image %}
-            <img class="border border-2" src="{{ post.image.url }}" alt="image" height="400" width="700">
+            <img  src="{{ post.image.url }}" alt="image" height="400" width="700">
         {% else %}
-            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+            <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
         {%endif%}       
     </div>
     <div>
@@ -63,11 +63,13 @@
 
     {% endif %}
 </div>
-
-    {% for comment in post.comments.all %}
-        <p>@{{ comment.author }}{{ comment.created_at }}</p>
-                <p>{{ comment.text }}</p>
-    {% endfor %}
+    <div >
+        {% for comment in post.comments.all %}
+            <span class"span">@{{ comment.author }}</span><br>
+                <span class"span">Дата {{ comment.created_at }}</span><br>
+                    <span>Комментарий</span><span>{{ comment.text }}</span><br>
+        {% endfor %}
+    </div>
         
 </div>
 

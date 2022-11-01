@@ -10,9 +10,9 @@
 <div id="{{ post.pk }}" style="width: 800px;">
     <div>
         {% if post.author.avatar %}
-            <img class="border border-2 rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
+            <img class="rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
         {% else %}
-            <img class="border border-2 rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" width="23">
+            <img class="rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" width="23">
         {%endif%}   
         <a href="{% url 'account_detail' post.author.username %}">
             <b>{{ post.author }}</b>
