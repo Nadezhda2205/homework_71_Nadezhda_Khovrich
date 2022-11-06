@@ -2,6 +2,7 @@ html{
     scroll-behavior: initial; 
 }
 
+
 .height_button{    
 height: fit-content;
 
@@ -18,4 +19,50 @@ a{
 
 span{
     margin-right: 32px;
+}
+
+/* .box_img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:300px;
+    height:300px;
+    object-fit:cover;
+ } */
+
+
+ .box {
+    position: relative;
+    overflow:hidden;
+    width:500px;
+    height:500px;
+ }
+ 
+ .box_img {
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:500px;
+    height:500px;
+    object-fit:cover;
+ }
+
+ .post_img_detail{
+    object-fit:cover;
+ }
+
+ 
+.card_items{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 24px;
+}
+
+.card_item{
+    display: inline-grid;
+	margin: 0 auto;
+	margin-bottom: 50px;
+	margin-bottom: 13px;
 }

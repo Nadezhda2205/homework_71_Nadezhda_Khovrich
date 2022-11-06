@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+
 {% load static %}
 
 
@@ -7,8 +9,7 @@
 <form enctype="multipart/form-data" method="POST" action="">
     <div class='form'>
         {% csrf_token %}
-
-        {{form.as_p}}
+        {{ form|bootstrap }}
 
         <input type="submit" value="Зарегистрироваться">
 

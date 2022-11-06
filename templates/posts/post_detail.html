@@ -1,4 +1,6 @@
 {% extends 'base.html' %}
+{% load bootstrap %}
+
 {% load static %}
 
 {% block title %}
@@ -7,70 +9,71 @@
 
 
 {% block content %}
+<div class="d-flex border border-primary" style="width: 800px;">
+    <div class="mb-5" >
+        <div>
+            {% if post.author.avatar %}
+                <img class=" rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" >
+            {% else %}
+                <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" >
+            {%endif%}   
+            <a href="{% url 'account_detail' post.author.username %}">
+                <b>{{ post.author }}</b>
+            </a>
+            
 
-<div class="mb-5" style="width: 800px;">
-    <div>
-        {% if post.author.avatar %}
-            <img class=" rounded-circle" src="{{ post.author.avatar.url }}" alt="image" height="30" width="30">
-        {% else %}
-            <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="23" width="23">
-        {%endif%}   
-        <a href="{% url 'account_detail' post.author.username %}">
-            <b>{{ post.author }}</b>
-        </a>
-        
+        </div>
+        <div>
+            {% if post.image %}
+                <img  src="{{ post.image.url }}" alt="image" height="400" >
+            {% else %}
+                <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400">
+            {%endif%}       
+        </div>
+        <div>
+            {% if user in post.liked_users.all %}
+                <a href="{% url 'unlike' post.pk%}"><img src="{% static 'icon/heart_like.png' %}" alt="heart" height="25" width="25"></a>
 
-    </div>
-    <div>
-        {% if post.image %}
-            <img  src="{{ post.image.url }}" alt="image" height="400" width="700">
-        {% else %}
-            <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
-        {%endif%}       
-    </div>
-    <div>
-        {% if user in post.liked_users.all %}
-            <a href="{% url 'unlike' post.pk%}"><img src="{% static 'icon/heart_like.png' %}" alt="heart" height="25" width="25"></a>
+            {% else %}
+                <a href="{% url 'like' post.pk%}"><img src="{% static 'icon/heart_unlike.png' %}" alt="heart" height="25" width="25"></a>
 
-        {% else %}
-            <a href="{% url 'like' post.pk%}"><img src="{% static 'icon/heart_unlike.png' %}" alt="heart" height="25" width="25"></a>
+            {% endif %}
+            
+        </div>    
+            <p>{{ post.liked_users.all.count }} отметок "Нравится"</p>
+        <div class="mb-2">
+            <b>@{{ post.author }}</b>
+            <span  style="width: 800px;">
+                {{ post.description }}
+            </span>
+        </div>
+    <div class="">
+        {% if user.is_authenticated %}
+            <form action="{% url 'post_comment_add' post.pk %}" method='POST'>
+                {% csrf_token %}
+
+                <div class="">
+                    {{ comment_form|bootstrap }}
+
+                    {% comment %} <p>{{ comment_form.as_p }}</p> {% endcomment %}
+
+                    <button class="btn btn-secondary btn-sm" type="submit">Добавить</button>
+                    
+                </div>
+            </form>    
+            
 
         {% endif %}
-        
-        <a href="#"><img src="{% static 'icon/icon-comm.png' %}" alt="heart" height="35" width="35"></a>
-    </div>    
-        <p>{{ post.liked_users.all.count }} отметок "Нравится"</p>
-    <div>
-        <b>@{{ post.author }}</b>
-        <p  style="width: 800px;">
-            {{ post.description }}
-        </p>
     </div>
-<div class="d-flex">
-    {% if user.is_authenticated %}
-        <form action="{% url 'post_comment_add' post.pk %}" method='POST'>
-            {% csrf_token %}
-
-            <div class="">
-
-                {{ comment_form.as_p }}
-
-                <button class=""type="submit">Опубликовать</button>
-                
-            </div>
-        </form>    
-        количество комментариев {{ post.comments.all.count }}
-
-    {% endif %}
-</div>
-    <div >
-        {% for comment in post.comments.all %}
-            <span class"span"><b>@{{ comment.author }}</b></span><br>
-                <span class"span">Дата {{ comment.created_at }}</span><br>
-                    <span>Комментарий</span><span>{{ comment.text }}</span><br>
-        {% endfor %}
+        <div >
+            {% for comment in post.comments.all %}
+                <span class"span"><b>@{{ comment.author }}</b></span><br>
+                    <span class"span">Дата {{ comment.created_at }}</span><br>
+                        <span>Комментарий</span><span>{{ comment.text }}</span><br>
+            {% endfor %}
+        </div>
+            
     </div>
-        
 </div>
 
 

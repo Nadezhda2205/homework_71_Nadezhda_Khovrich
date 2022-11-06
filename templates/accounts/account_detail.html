@@ -11,9 +11,9 @@
     
     <div class="me-5">
         {% if account.avatar %}
-            <img class="rounded-circle" src="{{ account.avatar.url }}" alt="image" height="200" width="250">
+            <img class="rounded-circle" src="{{ account.avatar.url }}" alt="image" height="250" width="250">
         {% else %}
-            <img class="rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" width="700">
+            <img class="rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="400" >
         {%endif%} 
     </div>
     <h3>{{ account.username }}</h3>
@@ -40,7 +40,7 @@
                         </div>
                     </al>
                     <al class="">
-                        <a class="" href="#">
+                        <a class="" href="{% url 'subscribers' account.username%}">
                             <div class="px-3">
                                 <span class="">{{ account.subscribers.all.count}}</span> 
                                 подписчиков
@@ -69,23 +69,18 @@
 <hr>
 
 <h3> Публикации</h3>
-    <div class="mb-5 d-flex row">
+    <div class=" card_items fade-out-siblings">
         {% for post in account.posts.all %}
+            <div class="card_item">
+                {% if post.image %}
+                    
+                    <a class="nav-link active" aria-current="page" href="{% url 'post_detail' post.pk %}"><img class="post_img_detail" src="{{ post.image.url }}" alt="image" height="250" width="250"></a>
 
-            <div class="col-sm-2 col-md-3 col-md-2"> 
-                <div>
-                    {% if post.image %}
-                        
-                        <a class="nav-link active" aria-current="page" href="{% url 'post_detail' post.pk %}"><img src="{{ post.image.url }}" alt="image" height="250" width="250"></a>
+                {% else %}
 
-                </div>
-                <div>
-                    {% else %}
-
-                    <a class="nav-link active" aria-current="page" href="#"><img src="{% static 'img/placeholder.png' %}" alt="image" height="250" width="250"></a>
-                    {%endif%}       
-                </div>
-            </div> 
+                <a class="nav-link active" aria-current="page" href="#"><img class="post_img_detail" src="{% static 'img/placeholder.png' %}" alt="image" height="250" width="250"></a>
+                {%endif%}       
+            </div>
         {% endfor %}
     </div>
 </div>

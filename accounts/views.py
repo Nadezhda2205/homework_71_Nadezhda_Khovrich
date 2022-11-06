@@ -101,3 +101,14 @@ class SearchAccountListView(ListView):
                 )
         return queryset
 
+
+class SubscribersListView(TemplateView):
+    template_name = 'accounts/account_subscribers.html'
+
+    def get_context_data(self, **kwargs):
+        username = kwargs.get('account')
+        user: Account = get_object_or_404(Account, username=username)
+        context = {
+            'account': user
+        }
+        return context

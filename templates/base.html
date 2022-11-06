@@ -17,6 +17,45 @@
 </head>
 
 <body>
+
+  <div class="container">
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+      <a href="{% url 'index' %}" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+        <img  src="{% static 'img/instalogo.jpg' %} " alt="logo" height="55" width="144">
+        <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+      </a>
+
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <form action="{% url 'account_list' %}" method="GET">
+            {% csrf_token %}
+          
+            <input class="btn btn-secondary btn-sm" name="search" type="text">
+            <input class="btn btn-secondary btn-sm" type="submit" value="Поиск">
+
+          </form>
+        </li>
+        <li class="nav-item"><a href="{% url 'post_add' %}" class="nav-link" aria-current="page">Добавить пост</a></li>
+        {% if user.is_authenticated %}
+        <li class="cl_color">
+          Здравствуйте >>>{{ user.username }}<<<
+        </li>
+        <li>    
+          <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <input class="btn btn-secondary btn-sm ms-5" type="submit" value="Выйти">
+          </form>
+        </li>  
+        {% else %}
+        <li><span class="cl_color">Выполнить вход:</span> <a class="btn btn-secondary btn-sm ms-5" href="{% url 'login' %}">Вход</a></li>
+        {% endif %}
+      </ul>
+    </header>
+  </div>
+
+
+
+{% comment %} 
   <nav class=" mb-5 nav_color navbar navbar-expand-lg navbar-light  mb-3">
     <div class="container">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
@@ -65,13 +104,15 @@
         </ul>
       </div>
     </div>
-  </nav>
+  </nav> {% endcomment %}
   
   <div class="container">
     {% block content %}
 
     {% endblock %}
   </div>
+  <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

@@ -9,7 +9,8 @@ from accounts.views import (
     AccountDetailView, 
     unsubscribe_view, 
     subscribe_view,
-    SearchAccountListView
+    SearchAccountListView,
+    SubscribersListView
 )
 from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view, PostDetailView
 
@@ -28,6 +29,7 @@ urlpatterns = [
     
     path('unsubscribe/<str:slug>', unsubscribe_view, name='unsubscribe'),
     path('subscribe/<str:slug>', subscribe_view, name='subscribe'),
+    path('account/<str:account>/subscribers', SubscribersListView.as_view(), name='subscribers'),
 
 
     path('post/<int:pk>/unlike', unlike_view, name='unlike'),

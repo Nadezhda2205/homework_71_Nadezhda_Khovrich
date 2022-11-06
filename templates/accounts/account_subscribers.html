@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Подписчики
+{% endblock %}
+
+
+{% block content %}
+<p>Список подписчиков пользователя 
+    <a class=" "  href="{% url 'account_detail' account.username %}">
+    <b>{{ account.username }}</b>
+</p>
+</a>
+{% for subscriber in account.subscribers.all %}
+
+
+<div>
+    <div class=" mb-5">
+        <a class=" "  href="{% url 'account_detail' subscriber.username %}">
+            {% if account.avatar %}
+                <img class=" rounded-circle" src="{{ subscriber.avatar.url }}" alt="image" height="50" width="50">
+            {% else %}
+                <img class=" rounded-circle" src="{% static 'img/placeholder.png' %}" alt="image" height="50" width="50">
+            {%endif%} 
+            <h6 class="d-contents">@{{ subscriber.username }}</h6>
+        </a>
+    <div>
+<div>
+    <hr>
+{% endfor %}
+
+{% endblock %}
