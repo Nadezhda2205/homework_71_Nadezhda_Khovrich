@@ -5,18 +5,14 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
-
-
 from accounts.forms import CustomUserСreationForm
 from accounts.forms import LoginForm
 from accounts.models import Account
 
 
-
 class LoginView(TemplateView):
     template_name = 'accounts/login.html'
     form = LoginForm
-
 
     def get(self, request, *args, **kwargs):
         form = self.form()
@@ -68,13 +64,15 @@ class AccountDetailView(DetailView):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Account, username=self.kwargs.get('slug'))
-        
+
+
 @login_required
 def unsubscribe_view(request: WSGIRequest, slug):
     user_from_request: Account = request.user
     user_by_slug = get_object_or_404(Account, username=slug)
     user_from_request.subscriptions.remove(user_by_slug)
     return redirect ('account_detail', slug=slug)
+
 
 @login_required
 def subscribe_view(request: WSGIRequest, slug):
@@ -113,6 +111,7 @@ class SubscribersListView(TemplateView):
         }
         return context
 
+
 class SubscriptionsListView(TemplateView):
     template_name = 'accounts/account_subscriptions.html'
 
@@ -123,3 +122,4 @@ class SubscriptionsListView(TemplateView):
             'account': user
         }
         return context
+        

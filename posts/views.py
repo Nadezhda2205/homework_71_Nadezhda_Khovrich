@@ -1,13 +1,13 @@
 from django.shortcuts import redirect, get_object_or_404
-from posts.models import Post, Comment
 from django.views.generic import ListView, CreateView, DetailView
 from django.urls import reverse
-from posts.forms import CommentForm
 from django.core.handlers.wsgi import WSGIRequest
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
 from accounts.models import Account
+from posts.models import Post, Comment
+from posts.forms import CommentForm
 
 
 
@@ -59,6 +59,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('post_detail', kwargs={'pk': self.kwargs.get('pk')})
+
 
 @login_required
 def unlike_view(request: WSGIRequest, pk):

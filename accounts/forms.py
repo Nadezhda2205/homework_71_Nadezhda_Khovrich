@@ -3,9 +3,6 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import get_user_model
 
 
-from accounts.models import Account
-
-
 class LoginForm(forms.Form):
     '''форма для входа'''
     username = forms.CharField(required=True, label='Логин')
@@ -17,7 +14,6 @@ class CustomUserСreationForm(forms.ModelForm):
     password = forms.CharField(label='Пароль', strip=False, required=True, widget=forms.PasswordInput)
     password_confirm = forms.CharField(label='Подтвердите пароль', strip=False, required=True, widget=forms.PasswordInput)
     email = forms.EmailField(label='Email', required=True)
-
 
     class Meta:
         model = get_user_model()

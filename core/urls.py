@@ -12,8 +12,15 @@ from accounts.views import (
     SearchAccountListView,
     SubscribersListView,
     SubscriptionsListView
-)
-from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view, PostDetailView
+    )
+from posts.views import (
+    PostListView,
+    PostCreateView,
+    CommentCreateView,
+    unlike_view,
+    like_view,
+    PostDetailView
+    )
 
 
 urlpatterns = [
@@ -27,12 +34,10 @@ urlpatterns = [
     path('account/search', SearchAccountListView.as_view(), name='account_list'),
     path('<str:slug>', AccountDetailView.as_view(), name='account_detail'),
     
-    
     path('unsubscribe/<str:slug>', unsubscribe_view, name='unsubscribe'),
     path('subscribe/<str:slug>', subscribe_view, name='subscribe'),
     path('<str:account>/subscribers', SubscribersListView.as_view(), name='subscribers'),
     path('<str:account>/subscriptions', SubscriptionsListView.as_view(), name='subscriptions'),
-
 
     path('post/<int:pk>/unlike', unlike_view, name='unlike'),
     path('post/<int:pk>/like', like_view, name='like'),
@@ -41,9 +46,5 @@ urlpatterns = [
     
     path('post/<int:pk>/comment/add', CommentCreateView.as_view(), name='post_comment_add'),
     path('post/<int:pk>', PostDetailView.as_view(), name='post_detail'),
-    
 
-
-
-
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

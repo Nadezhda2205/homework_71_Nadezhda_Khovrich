@@ -1,12 +1,8 @@
-from random import choices
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-
-
 class Account(AbstractUser):
-
     SEX_CHOICES = [('M', 'мужской'), ('F', 'женский')] 
     avatar = models.ImageField(
         upload_to='avatars',
@@ -27,7 +23,6 @@ class Account(AbstractUser):
         blank=True,
         verbose_name='Телефон',
         max_length=15
-
     )
     sex = models.CharField(
         choices=SEX_CHOICES,
@@ -42,7 +37,6 @@ class Account(AbstractUser):
         related_name='subscribers',
         blank=True
         )
-
 
     class Meta:
         verbose_name = 'Профиль'
