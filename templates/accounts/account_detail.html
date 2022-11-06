@@ -29,7 +29,10 @@
             {% endif %}
             
         </div>
-
+        {% if account == user%} 
+            <a class="height_button btn btn-secondary btn-sm ms-5" href="{% url 'account_update' account.username %}">Редактировать профиль</a>
+        {% endif %}
+        
 
         <div class="d-flex">
             <div class="mb-4">

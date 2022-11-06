@@ -11,7 +11,8 @@ from accounts.views import (
     subscribe_view,
     SearchAccountListView,
     SubscribersListView,
-    SubscriptionsListView
+    SubscriptionsListView,
+    AccountUpdateView
     )
 from posts.views import (
     PostListView,
@@ -32,6 +33,7 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     
     path('account/search', SearchAccountListView.as_view(), name='account_list'),
+    path('<str:slug>/update', AccountUpdateView.as_view(), name='account_update'),
     path('<str:slug>', AccountDetailView.as_view(), name='account_detail'),
     
     path('unsubscribe/<str:slug>', unsubscribe_view, name='unsubscribe'),

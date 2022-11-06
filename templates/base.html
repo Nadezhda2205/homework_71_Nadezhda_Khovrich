@@ -38,7 +38,10 @@
         <li class="nav-item"><a href="{% url 'post_add' %}" class="nav-link" aria-current="page">Добавить пост</a></li>
         {% if user.is_authenticated %}
         <li class="cl_color">
-          Здравствуйте >>>{{ user.username }}<<<
+          Здравствуйте
+          <a class="" href="{% url 'account_detail' user.username %}">
+            <b>{{ user.username }}</b>
+          </a>
         </li>
         <li>    
           <form action="{% url 'logout' %}" method="post">
@@ -53,59 +56,6 @@
     </header>
   </div>
 
-
-
-{% comment %} 
-  <nav class=" mb-5 nav_color navbar navbar-expand-lg navbar-light  mb-3">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
-        aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <div>
-            <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'img/instalogo.jpg' %} " alt="logo" height="55" width="144"></a>
-        </div>
-
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            {% if user.is_authenticated %}
-            <a class="nav-link active" aria-current="page" href="{% url 'post_add' %}"><span class="cl_color">Добавить пост</span></a>
-            {% endif %}
-          </li>
-          <div class="ms-5 d-flex align-items-center">
-            
-            <div class="align-items-center">
-              <form action="{% url 'account_list' %}" method="GET">
-                {% csrf_token %}
-               
-                <input class="btn btn-secondary btn-sm" name="search" type="text">
-                <input class="btn btn-secondary btn-sm" type="submit" value="Поиск">
-
-              </form>
-            </div>
-              
-            <div class="ms-5 d-flex align-items-center">
-              {% if user.is_authenticated %}
-                <li class="cl_color">
-                  Здравствуйте >>>{{ user.username }}<<<
-                </li>
-                <li>    
-                  <form action="{% url 'logout' %}" method="post">
-                    {% csrf_token %}
-                    <input class="btn btn-secondary btn-sm ms-5" type="submit" value="Выйти">
-                  </form>
-                </li>  
-              {% else %}
-                <li><span class="cl_color">Выполнить вход:</span> <a class="btn btn-secondary btn-sm ms-5" href="{% url 'login' %}">Вход</a></li>
-              {% endif %}
-            </div>      
-          </div>    
-        </ul>
-      </div>
-    </div>
-  </nav> {% endcomment %}
-  
   <div class="container">
     {% block content %}
 

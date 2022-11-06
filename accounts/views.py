@@ -1,9 +1,11 @@
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import TemplateView, CreateView, DetailView, ListView
+from django.views.generic import TemplateView, CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import CustomUserСreationForm
 from accounts.forms import LoginForm
@@ -122,4 +124,23 @@ class SubscriptionsListView(TemplateView):
             'account': user
         }
         return context
-        
+
+
+class AccountUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'accounts/account_update.html'
+    form_class = CustomUserСreationForm
+    model = Account
+    
+    def get_object(self, queryset=None):
+        return get_object_or_404(Account, username=self.kwargs.get('slug'))
+
+    def get_success_url(self):
+        return reverse_lazy('account_detail', kwargs={'slug': self.object.username})
+    
+    def dispatch(self, request, *args, **kwargs):
+        user_slug = kwargs['slug']
+        user = Account.objects.get(username=user_slug)
+        if not request.user == user:
+            return self.handle_no_permission()
+        return super().dispatch(request, *args, **kwargs)
+
