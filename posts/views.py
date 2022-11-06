@@ -16,6 +16,19 @@ class PostListView(ListView):
     model = Post
     context_object_name = 'posts'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if not self.request.user.is_authenticated:
+            return context
+        print(self.request.user.is_authenticated)
+        user: Account = self.request.user
+        subscriptions = user.subscriptions.all()
+        posts = Post.objects.all()
+        subscriptions_posts = posts.filter(author__in = subscriptions)
+        context['posts'] = subscriptions_posts
+
+        return context
+
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'posts/post_add.html'

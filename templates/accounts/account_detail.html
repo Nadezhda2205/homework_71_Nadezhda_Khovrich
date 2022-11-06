@@ -40,7 +40,7 @@
                         </div>
                     </al>
                     <al class="">
-                        <a class="" href="{% url 'subscribers' account.username%}">
+                        <a class="" href="{% url 'subscribers' account.username %}">
                             <div class="px-3">
                                 <span class="">{{ account.subscribers.all.count}}</span> 
                                 подписчиков
@@ -48,7 +48,7 @@
                         </a>
                     </al>
                     <al class="">
-                        <a class="" href="#">
+                        <a class="" href="{% url 'subscriptions'  account.username %}">
                             <div class="">
                                 <span class="">{{ account.subscriptions.all.count}}</span> 
                                 подписок

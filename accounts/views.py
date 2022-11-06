@@ -112,3 +112,14 @@ class SubscribersListView(TemplateView):
             'account': user
         }
         return context
+
+class SubscriptionsListView(TemplateView):
+    template_name = 'accounts/account_subscriptions.html'
+
+    def get_context_data(self, **kwargs):
+        username = kwargs.get('account')
+        user: Account = get_object_or_404(Account, username=username)
+        context = {
+            'account': user
+        }
+        return context

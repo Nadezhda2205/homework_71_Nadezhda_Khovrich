@@ -10,7 +10,8 @@ from accounts.views import (
     unsubscribe_view, 
     subscribe_view,
     SearchAccountListView,
-    SubscribersListView
+    SubscribersListView,
+    SubscriptionsListView
 )
 from posts.views import PostListView, PostCreateView, CommentCreateView, unlike_view, like_view, PostDetailView
 
@@ -24,12 +25,13 @@ urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     
     path('account/search', SearchAccountListView.as_view(), name='account_list'),
-    path('account/<str:slug>', AccountDetailView.as_view(), name='account_detail'),
+    path('<str:slug>', AccountDetailView.as_view(), name='account_detail'),
     
     
     path('unsubscribe/<str:slug>', unsubscribe_view, name='unsubscribe'),
     path('subscribe/<str:slug>', subscribe_view, name='subscribe'),
-    path('account/<str:account>/subscribers', SubscribersListView.as_view(), name='subscribers'),
+    path('<str:account>/subscribers', SubscribersListView.as_view(), name='subscribers'),
+    path('<str:account>/subscriptions', SubscriptionsListView.as_view(), name='subscriptions'),
 
 
     path('post/<int:pk>/unlike', unlike_view, name='unlike'),
