@@ -4,10 +4,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.handlers.wsgi import WSGIRequest
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from accounts.forms import CustomUserСreationForm
+from accounts.forms import CustomUserСreationForm, UserUpdateForm
 from accounts.forms import LoginForm
 from accounts.models import Account
 
@@ -128,7 +128,7 @@ class SubscriptionsListView(TemplateView):
 
 class AccountUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'accounts/account_update.html'
-    form_class = CustomUserСreationForm
+    form_class = UserUpdateForm
     model = Account
     
     def get_object(self, queryset=None):

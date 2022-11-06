@@ -81,7 +81,7 @@
 
                 {% else %}
 
-                <a class="nav-link active" aria-current="page" href="#"><img class="post_img_detail" src="{% static 'img/placeholder.png' %}" alt="image" height="250" width="250"></a>
+                <a class="nav-link active" aria-current="page" href="{% url 'post_detail' post.pk %}"><img class="post_img_detail" src="{% static 'img/placeholder.png' %}" alt="image" height="250" width="250"></a>
                 {%endif%}       
             </div>
         {% endfor %}
