@@ -65,7 +65,9 @@ def unlike_view(request: WSGIRequest, pk):
     user_from_request: Account = request.user
     post_by_pk = get_object_or_404(Post, pk=pk)
     post_by_pk.liked_users.remove(user_from_request)
-    return redirect (f'/#{pk}')
+    if 'post' in request.META.get('HTTP_REFERER'):
+        return redirect('post_detail', pk=pk)
+    return redirect(f'/#{pk}')
 
 
 @login_required
@@ -73,7 +75,9 @@ def like_view(request: WSGIRequest, pk):
     user_from_request: Account = request.user
     post_by_pk = get_object_or_404(Post, pk=pk)
     post_by_pk.liked_users.add(user_from_request)
-    return redirect (f'/#{pk}')
+    if 'post' in request.META.get('HTTP_REFERER'):
+        return redirect('post_detail', pk=pk)
+    return redirect(f'/#{pk}')
 
 
 class PostDetailView(DetailView):

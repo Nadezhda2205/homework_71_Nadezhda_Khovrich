@@ -10,7 +10,7 @@
 
 {% for post in posts %}
 
-<div class="row row-cols-1 g-4">
+<div class="row row-cols-1 g-4" id="{{post.pk}}">
     <div class="col" style="width: min-content;">
 
       <div class="card ">
@@ -53,7 +53,7 @@
             </a>
             <b>@{{ post.author }}</b>
           
-          <span class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</span>
+          <span class="card-text">{{ post.description }}</span>
         </div>
         {% comment %} <div class="card-footer">
         </div> {% endcomment %}
