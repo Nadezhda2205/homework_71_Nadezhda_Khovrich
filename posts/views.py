@@ -68,7 +68,7 @@ def unlike_view(request: WSGIRequest, pk):
     post_by_pk.liked_users.remove(user_from_request)
     if 'post' in request.META.get('HTTP_REFERER'):
         return redirect('post_detail', pk=pk)
-    return redirect(f'/#{pk}')
+    return redirect('/')
 
 
 @login_required
@@ -78,7 +78,7 @@ def like_view(request: WSGIRequest, pk):
     post_by_pk.liked_users.add(user_from_request)
     if 'post' in request.META.get('HTTP_REFERER'):
         return redirect('post_detail', pk=pk)
-    return redirect(f'/#{pk}')
+    return redirect('/')
 
 
 class PostDetailView(DetailView):
